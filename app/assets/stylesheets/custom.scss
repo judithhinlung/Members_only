@@ -177,3 +177,27 @@ input {
   }
 }
 
+/* Posts index */
+.posts {
+  background: #fff;
+}
+.post-title {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: .2em;
+  color: #cccccc; 
+}
+.content {
+  display: block;
+  height: 100px;
+  padding: 15px;
+  border: 1px solid #e6e6e6;
+  position: relative;
+}
+
+.timestamp {
+  border: 10px solid;
+  color: $gray-light;
+  display: block;
+  margin-left: 60px;
+}

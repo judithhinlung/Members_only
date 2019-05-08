@@ -1,0 +1,55 @@
+ orange:
+  title: "Orange"
+  body: "I have orange teeth!"
+  created_at: <%= 10.minutes.ago %>
+  user: michael
+
+ blue:
+  title: "Blue"
+  body: "She dyed her hair blue."
+  created_at: <%= 3.years.ago %>
+  user: michael
+
+ cat_video:
+  title: "Cat Video"
+  body: "Only take a look at the cat!"
+  created_at: <%= 2.hours.ago %>
+  user: michael
+
+ most_recent:
+  title: "Most recent"
+  body: "Saw the grade on my test"
+  created_at: <%= Time.zone.now %>
+  user: michael
+
+<% 30.times do |n| %>
+ post_<%= n %>:
+  title:  <%= Faker::Lorem.sentence(5) %>
+  body: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= 42.days.ago %>
+  user: michael
+<% end %>
+
+ ants:
+  title: "Ants"
+  body: "Oh, please clean your house, you have a lot of ants!"
+  created_at: <%= 2.years.ago %>
+  user: archer
+
+ zone:
+  title: "Zone"
+  body: "Danger zone!"
+  created_at: <%= 3.days.ago %>
+  user: archer
+
+ tune:
+  title: "Tune"
+  body: "Please don't forget to tune your instrument next time!"
+  created_at: <%= 10.minutes.ago %>
+  user: lana
+
+ van:
+  title: "Van"
+  body: "Did you forget where you parked your van again?"
+  created_at: <%= 4.hours.ago %>
+  user: lana

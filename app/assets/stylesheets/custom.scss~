@@ -165,3 +165,39 @@ input {
   width: auto;
   margin-left: 0;
 }
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+/* Posts index */
+.posts {
+  background: #fff;
+}
+.post-title {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: .2em;
+  color: #cccccc; }
+}
+.content {
+  display: block;
+  height: 100px;
+  padding: 15px;
+  border: 1px solid #e6e6e6;
+  position: relative;
+}
+
+.timestamp {
+  border: 10px solid;
+  color: $gray-light;
+  display: block;
+  margin-left: 60px;
+}

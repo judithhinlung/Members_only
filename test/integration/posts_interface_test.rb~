@@ -1,0 +1,46 @@
+require 'test_helper'
+
+class PostsInterfaceTest < ActionDispatch::IntegrationTest
+  def setup
+    @user = users(:michael)
+  end
+
+  test "Should not view user when not logged in" do
+    get posts_path
+    assert_template 'posts/index'
+    assert_select 'div.pagination'
+    first_page_of_posts = post.paginate(page: 1)
+    first_page_of_postss.each do |post|
+      assert_select 'a[href=?]', user_path(post.user), text: post.user, count: 0
+      assert_select post.title
+assert_select post.body
+    end
+  end
+
+  test "login and create new post" do
+    log_in_as(@user)
+    get user_path(@user)   
+assert_select 'a', text: 'write new post', count: 1
+    get new_post_path
+    title = "A Fine Morning"
+    body = "This is the finest morning of the week!"
+    # Invalid submission
+    post posts_path, params: { post: { title: title, body: "" } }
+    assert_select 'div#error_explanation'
+    # Valid submission
+    assert_difference 'Post.count', 1 do
+      post posts_path, params: { post: { title: title, body: body } }
+    end
+    post = assigns(:post)
+    follow_redirect
+    assert_match body, response.body
+    assert_select 'a', text: 'edit'
+    assert_select 'a', text: 'delete'
+    first_post = @user.posts.paginate(page: 1).first
+assert_difference 'Post.count', -1 do
+      delete posts_path(first_post) 
+    end
+    get user_path(users(:archer))
+    assert_select 'a', { text: 'delete', count: 0 }
+  end
+end
