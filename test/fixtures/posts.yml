@@ -24,7 +24,7 @@
 
 <% 30.times do |n| %>
  post_<%= n %>:
-  title:  <%= Faker::Lorem.sentence(5) %>
+  title: <%= Faker::Lorem.sentence(5) %>
   body: <%= Faker::Lorem.sentence(5) %>
   created_at: <%= 42.days.ago %>
   user: michael
@@ -42,14 +42,14 @@
   created_at: <%= 3.days.ago %>
   user: archer
 
- tune:
-  title: "Tune"
-  body: "Please don't forget to tune your instrument next time!"
-  created_at: <%= 10.minutes.ago %>
-  user: lana
-
  van:
   title: "Van"
   body: "Did you forget where you parked your van again?"
   created_at: <%= 4.hours.ago %>
+  user: lana
+
+ tune:
+  title: "Tune"
+  body: "I bet you forgot to tune again!"
+  created_at: <%= 10.minutes.ago %>
   user: lana

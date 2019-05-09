@@ -9,12 +9,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.post.build(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = "post created!"
-      redirect_to root_url
+      redirect_to posts_path
     else
-      render 'static_pages/home'
+      render 'new'
     end
   end
 

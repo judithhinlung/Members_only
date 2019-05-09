@@ -9,17 +9,17 @@ class PostsInterfaceTest < ActionDispatch::IntegrationTest
     get posts_path
     assert_template 'posts/index'
     assert_select 'div.pagination'
-    @user.posts.paginate(page: 1).each do |post|
+    Post.paginate(page: 1).each do |post|
       assert_select 'a[href=?]', user_path(post.user), text: post.user, count: 0
-      assert_select post.title
-assert_select post.body
+      assert_select 'h2', text: post.title
+      assert_match post.body, response.body
     end
   end
 
   test "login and create new post" do
     log_in_as(@user)
     get user_path(@user)   
-assert_select 'a', text: 'write new post', count: 1
+assert_select 'a[href=?]', new_post_path, text: "Write new post", count: 1
     get new_post_path
     title = "A Fine Morning"
     body = "This is the finest morning of the week!"
@@ -31,13 +31,13 @@ assert_select 'a', text: 'write new post', count: 1
       post posts_path, params: { post: { title: title, body: body } }
     end
     post = assigns(:post)
-    follow_redirect
-    assert_match body, response.body
+    follow_redirect!
+    assert_match post.body, response.body
     assert_select 'a', text: 'edit'
     assert_select 'a', text: 'delete'
     first_post = @user.posts.paginate(page: 1).first
 assert_difference 'Post.count', -1 do
-      delete posts_path(first_post) 
+      delete post_path(first_post) 
     end
     get user_path(users(:archer))
     assert_select 'a', { text: 'delete', count: 0 }
